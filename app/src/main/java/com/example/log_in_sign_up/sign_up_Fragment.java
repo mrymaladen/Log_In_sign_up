@@ -1,5 +1,6 @@
 package com.example.log_in_sign_up;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 import static com.google.firebase.auth.AuthKt.getAuth;
 
 import android.os.Bundle;
@@ -15,6 +16,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
 /**
@@ -26,7 +30,7 @@ public class sign_up_Fragment extends Fragment {
 
     private EditText edUsernameSingUp , edPasswordSingUp ;
     private Button btnSingUp ;
-    private FirebaseServeces firebaseServeces ;
+    private FirebaseServeces fbs ;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -78,15 +82,13 @@ public class sign_up_Fragment extends Fragment {
     {
         super.onStart();
         //conecting components
-        firebaseServeces = FirebaseServeces.getInstance();
-        edUsernameSingUp = getActivity().findViewById(R.id.edUsernameSingUp);
-        edPasswordSingUp = getActivity().findViewById(R.id.edPasswordSingUp);
+        fbs = FirebaseServeces.getInstance();
+        edUsernameSingUp = getView().findViewById(R.id.edUsernameSingUp);
+        edPasswordSingUp = getView().findViewById(R.id.edPasswordSingUp);
         btnSingUp = getActivity().findViewById(R.id.btnSingUp);
-        btnSingUp.setOnClickListener(new view.onClickListener())
-        {
+        btnSingUp.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 //data validation
                 String username = edUsernameSingUp.getText().toString();
                 String password = edPasswordSingUp.getText().toString();
@@ -95,21 +97,19 @@ public class sign_up_Fragment extends Fragment {
                     return;
                 }
                 //singup procedure
-                FirebaseServeces.getAuth().createUserWithEmailAndPassword(username, password).addOnCompleteListener(getActivity())
-                {
+                fbs.getAuth().createUserWithEmailAndPassword(username, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
-                    public void onComplete (@NonNull Task < AuthResult > task)
-                    {
-                        if (task.isSuccessful()) {
-                            //TODO: decide what to do
-                        } else {
-                            //TODO: decide what to do
-                        }
-                    }
-                }
+                    public void onSuccess(AuthResult authResult) {
 
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity(), "somethings went wrong", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
-        }
+        });
 
     }
 }
