@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private void gotoaddCarCommandFragment()
     {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frameLayoutMain, new CarCommandFragment());
+        ft.replace(R.id.frameLayoutMain, new AdCarCommandFragment());
         ft.commit();
     }
   //  private void gotoLoginFragment()
