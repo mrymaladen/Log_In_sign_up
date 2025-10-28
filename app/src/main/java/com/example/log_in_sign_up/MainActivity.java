@@ -26,14 +26,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        gotoLoginFragment();
+        gotoaddCarCommandFragment();
+
+
+        //gotoLoginFragment();
     }
-
-    private void gotoLoginFragment()
+    private void gotoaddCarCommandFragment()
     {
-
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frameLayoutMain, new LoginFragment());
+        ft.replace(R.id.frameLayoutMain, new CarCommandFragment());
         ft.commit();
     }
+  //  private void gotoLoginFragment()
+    //{
+
+      //  FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        //ft.replace(R.id.frameLayoutMain, new LoginFragment());
+       // ft.commit();
+    //}
+
+
 }
