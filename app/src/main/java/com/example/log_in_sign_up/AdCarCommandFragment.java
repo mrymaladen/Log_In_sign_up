@@ -26,7 +26,7 @@ import java.util.Locale;
 public class AdCarCommandFragment extends Fragment {
     private EditText etSquare, etMode, etAction, etTime;
     private Button btnSend;
-    private FirebaseServeces fbs;
+    private FirebaseServices fbs;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -85,7 +85,7 @@ public class AdCarCommandFragment extends Fragment {
         etMode = getView().findViewById(R.id.etMode);
         etAction = getView().findViewById(R.id.etAction);
         etTime = getView().findViewById(R.id.etTime);
-        fbs = FirebaseServeces.getInstance();
+        fbs = FirebaseServices.getInstance();
         btnSend = getActivity().findViewById(R.id.btnSend);
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
