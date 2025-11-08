@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         gotoaddCarCommandFragment();
 
 
-        //gotoLoginFragment();
+        gotoLoginFragment();
     }
     private void gotoaddCarCommandFragment()
     {
@@ -37,13 +37,13 @@ public class MainActivity extends AppCompatActivity {
         ft.replace(R.id.frameLayoutMain, new AdCarCommandFragment());
         ft.commit();
     }
-  //  private void gotoLoginFragment()
-    //{
+    private void gotoLoginFragment()
+    {
 
-      //  FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        //ft.replace(R.id.frameLayoutMain, new LoginFragment());
-       // ft.commit();
-    //}
+       FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frameLayoutMain, new LoginFragment());
+       ft.commit();
+    }
 
 
 }
