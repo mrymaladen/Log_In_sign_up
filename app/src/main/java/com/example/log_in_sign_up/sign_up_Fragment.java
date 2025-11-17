@@ -31,28 +31,56 @@ public class sign_up_Fragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onStart() {
+        super.onStart();
 
         fbs = FirebaseServices.getInstance();
-        edUsernameSingUp = view.findViewById(R.id.edUsernameSingUp);
-        edPasswordSingUp = view.findViewById(R.id.edPasswordSingUp);
-        btnSingUp = view.findViewById(R.id.btnSingUp);
-
-        btnSingUp.setOnClickListener(v -> {
-            String username = edUsernameSingUp.getText().toString().trim();
-            String password = edPasswordSingUp.getText().toString().trim();
-
-            if (username.isEmpty() || password.isEmpty()) {
-                Toast.makeText(getActivity(), "Some fields are empty!", Toast.LENGTH_SHORT).show();
-                return;
+        edUsernameSingUp = getView().findViewById(R.id.edUsernameSingUp);
+        edPasswordSingUp = getView().findViewById(R.id.edPasswordSingUp);
+        btnSingUp = getView().findViewById(R.id.btnSingUp);
+        Button btnGoToLogin= getView().findViewById(R.id.btnGoToLogin);
+        btnGoToLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.frameLayoutMain, new LoginFragment())
+                        .addToBackStack(null)
+                        .commit();
             }
 
-            fbs.getAuth().createUserWithEmailAndPassword(username, password)
-                    .addOnSuccessListener(authResult ->
-                            Toast.makeText(getActivity(), "Sign up successful!", Toast.LENGTH_SHORT).show())
-                    .addOnFailureListener(e ->
-                            Toast.makeText(getActivity(), "Something went wrong: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+            });
+
+        btnSingUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Data validation
+                String username = edUsernameSingUp.getText().toString();
+                String password = edPasswordSingUp.getText().toString();
+                if (username.trim().isEmpty() && password.trim().isEmpty()) {
+                    Toast.makeText(getActivity(), "Some fields are empty!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                // Signup procedure
+                fbs.getAuth().createUserWithEmailAndPassword(username, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        Toast.makeText(getActivity(), "You have successfully signed up!", Toast.LENGTH_LONG).show();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity(), "Failed to signup! Check user or password!", Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
+
+            }
+
+
         });
     }
 }

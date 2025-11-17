@@ -9,6 +9,7 @@ import com.google.firebase.storage.FirebaseStorage;
 public class FirebaseServices {
     private static FirebaseServices instance;
     private FirebaseAuth auth;
+
     private FirebaseFirestore firestore;
     private FirebaseStorage storage;
 

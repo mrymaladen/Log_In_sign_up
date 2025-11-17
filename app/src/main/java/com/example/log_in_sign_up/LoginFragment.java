@@ -124,34 +124,13 @@ public class LoginFragment extends Fragment {
         });
     }
 
-    // btnLogin.setOnClickListener(new View.OnClickListener() {
-          //  @Override
-          //  public void onClick(View V) {
-                //data validation
-               // String username = etUsernameLogin.getText().toString();
-              ////  String password = etPasswordLogin.getText().toString();
-             //   if (username.trim().isEmpty() || password.isEmpty()) {
-            //        Toast.makeText(getActivity(), "some fieds are empty!", Toast.LENGTH_SHORT).show();
-              //      return;
-               // }
-                //Login procedure
-               // fbs.getAuth().signInWithEmailAndPassword(username, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                 //   @Override
-                  //  public void onSuccess(AuthResult authResult) {
-                    //    if(task.isSuccessful())
-                   //     {
-//
-   //                      }
-     //               }
-       //         }).addOnFailureListener(new OnFailureListener() {
-         //           @Override
-           //         public void onFailure(@NonNull Exception e) {
-//
-   //                  }
-     //           });
-       //     }
-        //});
     private void gotoSignupFragment()
+    {
+        FragmentTransaction ft =getActivity(). getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frameLayoutMain, new sign_up_Fragment());
+        ft.commit();
+    }
+    private void gotoForgotFragment()
     {
         FragmentTransaction ft =getActivity(). getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frameLayoutMain, new sign_up_Fragment());

@@ -1,47 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".sign_up_Fragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <!-- عنوان الصفحة -->
+    <TextView
+        android:id="@+id/tvSignUpTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"/>
 
-        <EditText
-            android:id="@+id/edPasswordSingUp"
-            android:layout_width="265dp"
-            android:layout_height="113dp"
-            android:layout_marginTop="50dp"
-            android:ems="10"
-            android:hint="Password.."
-            android:inputType="textPassword"
-            app:layout_constraintStart_toStartOf="@+id/edUsernameSingUp"
-            app:layout_constraintTop_toBottomOf="@+id/edUsernameSingUp" />
+    <!-- إدخال البريد الإلكتروني -->
+    <EditText
+        android:id="@+id/edUsernameSingUp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:padding="12dp"
 
-        <EditText
-            android:id="@+id/edUsernameSingUp"
-            android:layout_width="253dp"
-            android:layout_height="97dp"
-            android:layout_marginTop="150dp"
-            android:ems="10"
-            android:hint="UserName.."
-            android:inputType="textEmailAddress"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tvSignUpTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"/>
 
-        <Button
-            android:id="@+id/btnSingUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="51dp"
-            android:text="Button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edPasswordSingUp"
-            tools:text="SingUp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+    <!-- إدخال كلمة المرور -->
+    <EditText
+        android:id="@+id/edPasswordSingUp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:padding="12dp"
+
+        app:layout_constraintTop_toBottomOf="@id/edUsernameSingUp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- زر التسجيل -->
+    <Button
+        android:id="@+id/btnSingUp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:padding="12dp"
+        app:layout_constraintTop_toBottomOf="@id/edPasswordSingUp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"/>
+
+    <Button
+        android:id="@+id/btnGoToLogin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Back to Login"
+        android:padding="12dp"
+        app:layout_constraintTop_toBottomOf="@id/btnSingUp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

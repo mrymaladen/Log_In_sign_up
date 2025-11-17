@@ -86,7 +86,7 @@ public class AdCarCommandFragment extends Fragment {
         etAction = getView().findViewById(R.id.etAction);
         etTime = getView().findViewById(R.id.etTime);
         fbs = FirebaseServices.getInstance();
-        btnSend = getActivity().findViewById(R.id.btnSend);
+        btnSend = getView().findViewById(R.id.btnSend);
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
