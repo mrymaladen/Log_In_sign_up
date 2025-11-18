@@ -107,7 +107,7 @@ public class AdCarCommandFragment extends Fragment {
                     return;
                 }
                 CarCommand command = new CarCommand(square, mode, action, time);
-                fbs.getFirestore().collection("car command").add(command).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                fbs.getFirestore().collection("commands").add(command).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         //what to do in successful cases
@@ -117,7 +117,8 @@ public class AdCarCommandFragment extends Fragment {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         //what to do in failure
-                        Toast.makeText(getActivity(), "somethings went wrong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "somethi" +
+                                "ngs went wrong", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

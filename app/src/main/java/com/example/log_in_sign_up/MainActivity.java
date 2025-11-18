@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         gotoaddCarCommandFragment();
 
-
-        gotoLoginFragment();
+        gotoaddCarCommandFragment();
+      ////  gotoLoginFragment();
     }
     private void gotoaddCarCommandFragment()
     {
@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private void gotoLoginFragment()
     {
 
-       FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frameLayoutMain, new LoginFragment());
+     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+      ft.replace(R.id.frameLayoutMain, new LoginFragment());
        ft.commit();
     }
 

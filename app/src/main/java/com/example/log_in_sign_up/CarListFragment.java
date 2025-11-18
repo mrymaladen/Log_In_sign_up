@@ -52,7 +52,7 @@ public class CarListFragment extends Fragment {
     }
 
     private void loadCarCommands() {
-        fbs.getFirestore().collection("car command")
+        fbs.getFirestore().collection("commands")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     carCommandList.clear();
