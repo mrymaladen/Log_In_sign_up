@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         gotoaddCarCommandFragment();
 
-        gotoaddCarCommandFragment();
-      ////  gotoLoginFragment();
+       //// gotoaddCarCommandFragment();
+        gotoLoginFragment();
     }
     private void gotoaddCarCommandFragment()
     {

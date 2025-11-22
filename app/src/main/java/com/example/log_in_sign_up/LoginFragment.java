@@ -113,6 +113,8 @@ public class LoginFragment extends Fragment {
                         // You should probably check authResult or do something else.
                         // For example, navigate to another screen.
                         Toast.makeText(getActivity(), "Login Successful!", Toast.LENGTH_SHORT).show();
+                        // TODO: Navigate to another screen.
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayoutMain, new AdminFragment()).commit();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

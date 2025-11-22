@@ -13,10 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+// Define the CarCommand class عرض بيانات أوامر السيارة داخل RecyclerView بشكل منسّق.
+//🔥 كل أمر (CarCommand) يظهر كعنصر مستقل داخل القائمة.
+
 public class CarCommandAdapter extends RecyclerView.Adapter<CarCommandAdapter.CarCommandViewHolder> {
 
     private List<CarCommand> commands;
-    public CarCommandAdapter(List<CarCommand> commands) { // قبله كان ArrayList
+    public CarCommandAdapter(List<CarCommand> commands) {
         this.commands = commands;
     }
 
