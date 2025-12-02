@@ -1,11 +1,14 @@
 package com.example.log_in_sign_up;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,4 +69,5 @@ public class CarListFragment extends Fragment {
                         Toast.makeText(getContext(), "Failed to load commands", Toast.LENGTH_SHORT).show()
                 );
     }
+
 }

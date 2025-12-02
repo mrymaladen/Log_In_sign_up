@@ -23,20 +23,20 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     @Override
     protected void onStart() {
         super.onStart();
-        gotoaddCarCommandFragment();
 
-       //// gotoaddCarCommandFragment();
-        gotoLoginFragment();
+
+        {
+            gotoLoginFragment();
+        }
+
+
+
     }
-    private void gotoaddCarCommandFragment()
-    {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frameLayoutMain, new AdCarCommandFragment());
-        ft.commit();
-    }
+
     private void gotoLoginFragment()
     {
 

@@ -42,7 +42,7 @@ public class Utilss {
         builder.create().show();
     }
 
-    public void uploadImage(Context context, Uri selectedImageUri) {
+    public  void uploadImage(Context context, Uri selectedImageUri) {
         if (selectedImageUri != null) {
             String imageName = "images/" + UUID.randomUUID().toString() + ".jpg";
             StorageReference imageRef = fbs.getStorage().getReference().child(imageName);

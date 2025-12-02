@@ -1,14 +1,20 @@
 package com.example.log_in_sign_up;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -18,15 +24,21 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link AdCarCommandFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class AdCarCommandFragment extends Fragment {
+    private static final int GALLERY_REQUEST_CODE = 123;
+    ImageView img;
+    private Utilss utils;
     private EditText etSquare, etMode, etAction, etTime;
     private Button btnSend;
     private FirebaseServices fbs;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -87,41 +99,75 @@ public class AdCarCommandFragment extends Fragment {
         etTime = getView().findViewById(R.id.etTime);
         fbs = FirebaseServices.getInstance();
         btnSend = getView().findViewById(R.id.btnSend);
+        utils = Utilss.getInstance();
+        img = getView().findViewById(R.id.img);
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openGallery();
+            }
+        });
+
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //data validation
-                String square, mode, action, time;
-                square = etSquare.getText().toString();
-                mode = etMode.getText().toString();
-                action = etAction.getText().toString();
-                time = etTime.getText().toString();
+                sendCommand();
+            }
 
-                if (time.trim().isEmpty()) {
-                    // إذا المستخدم ما كتب الوقت، نحط الوقت الحالي تلقائيًا
-                    time = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(new Date());
-                }
 
-                if (square.isEmpty() || mode.isEmpty() || action.isEmpty()) {
-                    Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                CarCommand command = new CarCommand(square, mode, action, time);
-                fbs.getFirestore().collection("commands").add(command).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        //what to do in successful cases
-                        Toast.makeText(getActivity(), "command sent successfully", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        //what to do in failure
-                        Toast.makeText(getActivity(), "somethi" +
-                                "ngs went wrong", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        });
+
+    }
+
+    private void sendCommand() {
+        //data validation
+        String square, mode, action, time;
+        square = etSquare.getText().toString();
+        mode = etMode.getText().toString();
+        action = etAction.getText().toString();
+        time = etTime.getText().toString();
+
+        if (time.trim().isEmpty()) {
+            // إذا المستخدم ما كتب الوقت، نحط الوقت الحالي تلقائيًا
+            time = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(new Date());
+        }
+
+        if (square.isEmpty() || mode.isEmpty() || action.isEmpty()) {
+            Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String imageUrl = fbs.getSelectedImageURL() != null ? fbs.getSelectedImageURL().toString() : "";
+
+        CarCommand command = new CarCommand(square, mode, action, time,imageUrl);
+        fbs.getFirestore().collection("commands").add(command).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                //what to do in successful cases
+                Toast.makeText(getActivity(), "command sent successfully", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                //what to do in failure
+                Toast.makeText(getActivity(), "somethi" +
+                        "ngs went wrong", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void openGallery() {
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GALLERY_REQUEST_CODE && resultCode == getActivity().RESULT_OK && data != null) {
+            Uri selectedImageUri = data.getData();
+            img.setImageURI(selectedImageUri);
+            utils.uploadImage(getActivity(), selectedImageUri);
+            Toast.makeText(getActivity(), "Image uploaded successfully", Toast.LENGTH_SHORT).show();
+        }
     }
 }

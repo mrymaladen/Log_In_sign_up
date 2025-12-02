@@ -31,11 +31,23 @@
         android:layout_height="90dp"
         android:hint="Time (optional)" />
 
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="16dp"
+        android:background="@android:color/darker_gray"
+        android:contentDescription="Car Image"
+        android:scaleType="centerCrop"
+        android:src="@android:drawable/ic_menu_camera" />
+
     <Button
         android:id="@+id/btnSend"
         android:text="Send Command"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
 
 </LinearLayout>

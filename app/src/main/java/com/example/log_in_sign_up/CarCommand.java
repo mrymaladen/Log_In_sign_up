@@ -5,17 +5,19 @@ public class CarCommand {
     private String targetSquare;   // المربع الذي تتحرك إليه السيارة (1 إلى 9)
     private String mode;           // وضع التشغيل: "manual" أو "auto"
     private String action;         // العملية: "move", "spray", "stop"
-    private String time;           // الوقت أو التاريخ الذي أُرسل فيه الأمر
+    private String time;  // الوقت أو التاريخ الذي أُرسل فيه الأمر
+    private String imageUrl;
 
     // 🔹 لازم يكون في constructor فاضي عشان Firestore يعرف يبني الكائن
     public CarCommand() {}
 
     // 🔹 Constructor آخر لتعبئة البيانات بسهولة
-    public CarCommand(String targetSquare, String mode, String action, String time) {
+    public CarCommand(String targetSquare, String mode, String action, String time, String imageUrl) {
         this.targetSquare = targetSquare;
         this.mode = mode;
         this.action = action;
         this.time = time;
+        this.imageUrl = imageUrl;
     }
 
     // 🔹 Getters and Setters
@@ -50,6 +52,8 @@ public class CarCommand {
     public void setTime(String time) {
         this.time = time;
     }
+
+
 
     // 🔹 طريقة مفيدة لعرض القيم عند الطباعة أو التصحيح
     @Override
